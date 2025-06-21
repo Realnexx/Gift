@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 Gift Express - Send Love & Joy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Welcome Page -->
+    <div id="welcomePage" class="page active">
+        <div class="floating-hearts">
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+        </div>
+        
+        <div class="welcome-container">
+            <div class="logo-section">
+                <h1 class="app-title">
+                    <span class="gift-icon">🎁</span>
+                    Gift Express
+                    <span class="sparkle">✨</span>
+                </h1>
+                <p class="subtitle">Spread love, one gift at a time</p>
+            </div>
+            
+            <div class="welcome-card">
+                <div class="user-section" id="userSection">
+                    <div class="login-form" id="loginForm">
+                        <h3>Welcome Back! 💕</h3>
+                        <input type="text" id="loginName" placeholder="Your name" class="cute-input">
+                        <input type="email" id="loginEmail" placeholder="Your email" class="cute-input">
+                        <button onclick="login()" class="btn btn-primary">
+                            <i class="fas fa-heart"></i> Log In
+                        </button>
+                        <p class="switch-text">New here? <span onclick="showSignup()" class="link">Sign up</span></p>
+                    </div>
+                    
+                    <div class="signup-form" id="signupForm" style="display: none;">
+                        <h3>Join the Love! 🌸</h3>
+                        <input type="text" id="signupName" placeholder="Your name" class="cute-input">
+                        <input type="email" id="signupEmail" placeholder="Your email" class="cute-input">
+                        <button onclick="signup()" class="btn btn-primary">
+                            <i class="fas fa-star"></i> Sign Up
+                        </button>
+                        <p class="switch-text">Already have an account? <span onclick="showLogin()" class="link">Log in</span></p>
+                    </div>
+                    
+                    <div class="user-welcome" id="userWelcome" style="display: none;">
+                        <h3>Welcome back, <span id="userName"></span>! 🎉</h3>
+                        <button onclick="goToGiftSelection()" class="btn btn-primary">
+                            <i class="fas fa-gift"></i> Start Gifting
+                        </button>
+                        <button onclick="logout()" class="btn btn-secondary">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <button onclick="continueAsGuest()" class="btn btn-guest">
+                    <i class="fas fa-user-secret"></i> Continue as Guest
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Selection Page -->
+    <div id="giftSelectionPage" class="page">
+        <div class="page-header">
+            <button onclick="goBack('welcomePage')" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>Choose Your Gift Type 🎁</h2>
+            <button onclick="showMyGifts()" class="my-gifts-btn">
+                <i class="fas fa-history"></i> My Gifts
+            </button>
+        </div>
+        
+        <div class="gift-categories">
+            <div class="gift-card" onclick="selectGiftType('birthday')">
+                <div class="gift-icon">🎂</div>
+                <h3>Birthday Gift</h3>
+                <p>Celebrate their special day</p>
+                <div class="card-decoration">🎈🎉</div>
+            </div>
+            
+            <div class="gift-card" onclick="selectGiftType('crush')">
+                <div class="gift-icon">💕</div>
+                <h3>Crush Gift</h3>
+                <p>Show someone you care</p>
+                <div class="card-decoration">💖💫</div>
+            </div>
+            
+            <div class="gift-card" onclick="selectGiftType('confession')">
+                <div class="gift-icon">💌</div>
+                <h3>Confession Gift</h3>
+                <p>Express your feelings</p>
+                <div class="card-decoration">🌹💝</div>
+            </div>
+            
+            <div class="gift-card" onclick="selectGiftType('apology')">
+                <div class="gift-icon">🙏</div>
+                <h3>Apology Gift</h3>
+                <p>Make things right</p>
+                <div class="card-decoration">🕊️💙</div>
+            </div>
+            
+            <div class="gift-card" onclick="selectGiftType('justbecause')">
+                <div class="gift-icon">🌟</div>
+                <h3>Just Because</h3>
+                <p>No reason needed</p>
+                <div class="card-decoration">✨🎀</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Customization Page -->
+    <div id="customizationPage" class="page">
+        <div class="page-header">
+            <button onclick="goBack('giftSelectionPage')" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>Customize Your Gift ✨</h2>
+        </div>
+        
+        <div class="customization-container">
+            <div class="image-selection">
+                <h3>Choose a Picture 📸</h3>
+                <div class="image-grid" id="imageGrid">
+                    <!-- Images will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="gift-form">
+                <div class="form-group">
+                    <label for="recipientName">Recipient's Name 💝</label>
+                    <input type="text" id="recipientName" class="cute-input" placeholder="Who is this gift for?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customMessage">Your Message 💌</label>
+                    <textarea id="customMessage" class="cute-textarea" placeholder="Write your heartfelt message here..."></textarea>
+                </div>
+                
+                <button onclick="sendGift()" class="btn btn-send">
+                    <i class="fas fa-paper-plane"></i> Send Gift
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Page -->
+    <div id="confirmationPage" class="page">
+        <div class="confirmation-container">
+            <div class="success-animation">
+                <div class="gift-sent-icon">🎁</div>
+                <h2>Gift Sent Successfully! 🎉</h2>
+                <p>Your love has been delivered! 💕</p>
+            </div>
+            
+            <div class="gift-preview" id="giftPreview">
+                <!-- Gift details will be populated here -->
+            </div>
+            
+            <div class="action-buttons">
+                <button onclick="shareGift()" class="btn btn-share">
+                    <i class="fab fa-facebook-messenger"></i> Share via Messenger
+                </button>
+                <button onclick="sendAnother()" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Send Another
+                </button>
+                <button onclick="goHome()" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Gifts Page -->
+    <div id="myGiftsPage" class="page">
+        <div class="page-header">
+            <button onclick="goBack('giftSelectionPage')" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>My Sent Gifts 📦</h2>
+        </div>
+        
+        <div class="gifts-container" id="giftsContainer">
+            <!-- Previous gifts will be populated here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
